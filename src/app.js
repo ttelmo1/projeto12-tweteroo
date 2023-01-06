@@ -31,12 +31,12 @@ server.post('/tweets', (req, res) => {
 
 server.get('/tweets', (req, res) => {
   
-    let i = tweets.length;
+    let i = TweetArr.length;
     let j = 0;
     const lastTen = [];
 
     while((i > 0 || j < 10) && tweets[i - 1] !== undefined) {
-        const avatar = users.find(user => user.username === tweets[i - 1].username).avatar;
+        const avatar = UserArr.find(user => user.username === tweets[i - 1].username).avatar;
 
         lastTen.push({
             username: tweets[i - 1].username,
@@ -50,7 +50,7 @@ server.get('/tweets', (req, res) => {
         if(j === 10) {
             break;
         }
-        
+
 }
 
     return res.send(lastTen);
