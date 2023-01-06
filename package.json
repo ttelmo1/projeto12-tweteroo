@@ -1,7 +1,7 @@
 {
   "name": "projeto12-tweteroo",
   "version": "1.0.0",
-  "type":  "module",
+  "type": "module",
   "description": "",
   "main": "app.js",
   "scripts": {
