@@ -1,13 +1,11 @@
 import express from "express";
 import cors from "cors";
 
-server.use(cors());
-server.use(express.json());
-
 const server = express();
 const PORT = 5000;
 
-
+server.use(cors());
+server.use(express.json());
 
 const UserArr = [];
 const TweetArr = [];
