@@ -46,6 +46,11 @@ server.get('/tweets', (req, res) => {
 
         i--;
         j++;
+
+        if(j === 10) {
+            break;
+        }
+        
 }
 
     return res.send(lastTen);
