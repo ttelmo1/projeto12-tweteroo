@@ -24,23 +24,32 @@ server.post('/tweets', (req, res) => {
             res.send("OK");
         }
         else {
-            res.send("UNAUTHORIZED");
+            res.status(400).send("UNAUTHORIZED");
         }
     }
 });
 
 server.get('/tweets', (req, res) => {
-    const tweets = TweetArr.map(tweet => {
-        const user = UserArr.find(user => user.username === tweet.username);
-        return {
-            username: tweet.username,
-            tweet: tweet.tweet,
-            avatar: user.avatar
-        };
-    });
-    res.send(tweets.slice(-10));
-});
+  
+    let i = tweets.length;
+    let j = 0;
+    const lastTen = [];
 
+    while((i > 0 || j < 10) && tweets[i - 1] !== undefined) {
+        const avatar = users.find(user => user.username === tweets[i - 1].username).avatar;
+
+        lastTen.push({
+            username: tweets[i - 1].username,
+            tweet: tweets[i - 1].tweet,
+            avatar: avatar
+        });
+
+        i--;
+        j++;
+}
+
+    return res.send(lastTen);
+});
 
 
 server.listen(PORT, () => {
