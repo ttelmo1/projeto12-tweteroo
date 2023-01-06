@@ -38,7 +38,7 @@ server.get('/tweets', (req, res) => {
             avatar: user.avatar
         };
     });
-    res.send(tweets);
+    res.send(tweets.slice(-10));
 });
 
 
