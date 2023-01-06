@@ -18,18 +18,28 @@ server.post('/sign-up', (req, res) => {
 });
 
 server.post('/tweets', (req, res) => {
-    for(let i = 0; i < UserArr.length; i++) {
-        if(UserArr[i].username === TWEET.username) {
+    for (let i = 0; i < UserArr.length; i++) {
+        if (UserArr[i].username === TWEET.username) {
             TweetArr.push(TWEET);
             res.send("OK");
         }
-        else{
+        else {
             res.send("UNAUTHORIZED");
         }
     }
 });
 
-
+server.get('/tweets', (req, res) => {
+    const tweets = TweetArr.map(tweet => {
+        const user = UserArr.find(user => user.username === tweet.username);
+        return {
+            username: tweet.username,
+            tweet: tweet.tweet,
+            avatar: user.avatar
+        };
+    });
+    res.send(tweets);
+});
 
 
 
