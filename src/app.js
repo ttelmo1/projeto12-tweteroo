@@ -36,12 +36,12 @@ server.get('/tweets', (req, res) => {
     let j = 0;
     const lastTen = [];
 
-    while((i > 0 || j < 10) && tweets[i - 1] !== undefined) {
-        const avatar = UserArr.find(user => user.username === tweets[i - 1].username).avatar;
+    while((i > 0 || j < 10) && TweetArr[i - 1] !== undefined) {
+        const avatar = UserArr.find(user => user.username === TweetArr[i - 1].username).avatar;
 
         lastTen.push({
-            username: tweets[i - 1].username,
-            tweet: tweets[i - 1].tweet,
+            username: TweetArr[i - 1].username,
+            tweet: TweetArr[i - 1].tweet,
             avatar: avatar
         });
 
