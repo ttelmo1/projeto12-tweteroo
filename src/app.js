@@ -11,22 +11,23 @@ const UserArr = [];
 const TweetArr = [];
 
 server.post('/sign-up', (req, res) => {
+    if(!req.body.username || !req.body.avatar) return res.send("Todos os campos são obrigatórios");
+
     const USER = { username: req.body.username, avatar: req.body.avatar };
     UserArr.push(USER);
-    res.send(USER);
+    res.status(200).send('OK');
+
 });
 
 server.post('/tweets', (req, res) => {
     const TWEET = { username: req.body.username, tweet: req.body.tweet };
-    for (let i = 0; i < UserArr.length; i++) {
-        if (UserArr[i].username === TWEET.username) {
-            TweetArr.push(TWEET);
-            res.send("OK");
-        }
-        else {
-            res.status(400).send("UNAUTHORIZED");
-        }
-    }
+    const logado = UserArr.find(user => user.username === TWEET.username);
+
+    if(!logado) return res.send("UNAUTHORIZED");
+
+    TweetArr.push(TWEET);
+
+    return res.status(201).send('CREATED');
 });
 
 server.get('/tweets', (req, res) => {
